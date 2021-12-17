@@ -1,0 +1,32 @@
+GET http://localhost:3000/fahrer
+###
+GET http://localhost:3000/rennen
+###
+GET http://localhost:3000/rennen/9
+###
+DELETE http://localhost:3000/rennen/64
+###
+POST http://localhost:3000/rennen
+Content-Type: application/json
+
+{
+  "land": "Österreich",
+  "ort": "Lienz",
+  "datum": "2021-12-28",
+  "uhrzeit": "10:15",
+  "geschlecht": "Damen"
+}
+###
+PATCH http://localhost:3000/rennen/9
+Content-Type: application/json	
+
+{
+    "uhrzeit": "11:00"
+}
+###
+PATCH http://localhost:3000/rennen/9
+Content-Type: application/json	
+
+{
+    "datum": "2021-12-28"
+}

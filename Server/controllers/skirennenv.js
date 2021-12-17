@@ -1,0 +1,68 @@
+const asyncHandler = require('express-async-handler');
+const model = require('../model/skirennenv');
+
+const getFahrer = asyncHandler(async (req, res) => {
+  res.status(200).json(await model.getFahrer());
+});
+
+const getRennen = asyncHandler(async (req, res) => {
+  res.status(200).json(await model.getRennen());
+});
+
+const getRen = asyncHandler(async (req, res) => {
+  res.status(200).json(await model.getRen(req.params.rennnummer));
+});
+
+const delRennen = asyncHandler(async (req, res) => {
+  const { rennnummer } = req.params;
+  const rows = await model.getRen(rennnummer);
+  console.log(rows);
+  if (rows.lenght === 0) res.status(404).send(`Race ${rennnummer} does not exist`);
+  else {
+    model.delRennen(rennnummer);
+    res.status(204).end();
+  }
+});
+
+const postRennen = asyncHandler(async (req, res) => {
+  const { rennnummer, land, ort, datum, uhrzeit, geschlecht } = req.body;
+  if (!land || !ort || !datum || !uhrzeit || !geschlecht) {
+    res.status(400).send('One or more properties missing: land, ort, datum, uhrzeit, geschlecht');
+    return;
+  }
+  const rows = await model.getRen(rennnummer);
+  if (rows.length > 0) res.status(200).send(`Rennen ${rennnummer} already exists`);
+  else res.status(201).json(await model.postRennen(req.body));
+});
+
+const changeTime = asyncHandler(async (req, res) => {
+  const { uhrzeit } = req.body;
+  const { rennnummer } = req.params;
+  const rows = await model.getRen(rennnummer);
+  if (rows.lenght === 0) res.status(404).send(`Race ${rennnummer} does not exist`);
+  else {
+    model.changeTime(rennnummer, uhrzeit);
+    res.status(204).end();
+  }
+});
+
+const changeDate = asyncHandler(async (req, res) => {
+  const { datum } = req.body;
+  const { rennnummer } = req.params;
+  const rows = await model.getRen(rennnummer);
+  if (rows.lenght === 0) res.status(404).send(`Race ${rennnummer} does not exist`);
+  else {
+    model.changeDate(rennnummer, datum);
+    res.status(204).end();
+  }
+});
+
+module.exports = {
+  getFahrer,
+  getRennen,
+  getRen,
+  delRennen,
+  postRennen,
+  changeTime,
+  changeDate,
+};
