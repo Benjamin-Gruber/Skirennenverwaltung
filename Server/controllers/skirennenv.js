@@ -16,44 +16,43 @@ const getRen = asyncHandler(async (req, res) => {
 const delRennen = asyncHandler(async (req, res) => {
   const { rennnummer } = req.params;
   const rows = await model.getRen(rennnummer);
-  console.log(rows);
-  if (rows.lenght === 0) res.status(404).send(`Race ${rennnummer} does not exist`);
+  if (rows.length === 0) res.status(404).send(`Race ${rennnummer} does not exist.`);
   else {
     model.delRennen(rennnummer);
-    res.status(204).end();
+    res.status(200).send(`Race ${rennnummer} has been delted.`);
   }
 });
 
 const postRennen = asyncHandler(async (req, res) => {
-  const { rennnummer, land, ort, datum, uhrzeit, geschlecht } = req.body;
+  const { land, ort, datum, uhrzeit, geschlecht } = req.body;
+  console.log('post:', ort, uhrzeit);
   if (!land || !ort || !datum || !uhrzeit || !geschlecht) {
     res.status(400).send('One or more properties missing: land, ort, datum, uhrzeit, geschlecht');
     return;
   }
-  const rows = await model.getRen(rennnummer);
-  if (rows.length > 0) res.status(200).send(`Rennen ${rennnummer} already exists`);
-  else res.status(201).json(await model.postRennen(req.body));
+  let tempbole = false;
+  const rows = await model.getRennen();
+  for (const check of rows) {
+    const tempuhr = check.uhrzeit.slice(0, 5);
+    if (check.ort === ort && tempuhr === uhrzeit) {
+      tempbole = true;
+    }
+  }
+  if (tempbole) {
+    res.status(500).send('Rennen already exists');
+  } else {
+    res.status(201).json(await model.postRennen(req.body));
+  }
 });
 
 const changeTime = asyncHandler(async (req, res) => {
   const { uhrzeit } = req.body;
   const { rennnummer } = req.params;
   const rows = await model.getRen(rennnummer);
-  if (rows.lenght === 0) res.status(404).send(`Race ${rennnummer} does not exist`);
+  if (rows.length === 0) res.status(404).send(`Race ${rennnummer} does not exist`);
   else {
     model.changeTime(rennnummer, uhrzeit);
-    res.status(204).end();
-  }
-});
-
-const changeDate = asyncHandler(async (req, res) => {
-  const { datum } = req.body;
-  const { rennnummer } = req.params;
-  const rows = await model.getRen(rennnummer);
-  if (rows.lenght === 0) res.status(404).send(`Race ${rennnummer} does not exist`);
-  else {
-    model.changeDate(rennnummer, datum);
-    res.status(204).end();
+    res.status(200).send(`Race ${rennnummer} has been postponed`);
   }
 });
 
@@ -64,5 +63,4 @@ module.exports = {
   delRennen,
   postRennen,
   changeTime,
-  changeDate,
 };

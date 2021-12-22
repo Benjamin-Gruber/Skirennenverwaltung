@@ -6,7 +6,6 @@ const {
   delRennen,
   postRennen,
   changeTime,
-  changeDate,
 } = require('../controllers/skirennenv');
 
 const router = express.Router();
@@ -17,6 +16,5 @@ router.get('/rennen/:rennnummer', getRen);
 router.delete('/rennen/:rennnummer', delRennen);
 router.post('/rennen', postRennen);
 router.patch('/rennen/:rennnummer', changeTime);
-router.patch('/rennen/:rennnummer/datum', changeDate);
 
 module.exports = router;
