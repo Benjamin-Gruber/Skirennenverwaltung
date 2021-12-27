@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const helmet = require('helmet');
 const path = require('path');
+const cors = require('cors');
 const routes = require('./routes/skirennenv');
 
 const { notFound, errorHandler } = require('./middleware/errorHandler');
@@ -15,6 +16,7 @@ app.use(morgan('dev'));
 
 app.use(express.static(path.join(__dirname, '/public')));
 app.use(helmet());
+app.use(cors());
 
 app.use(express.json());
 
