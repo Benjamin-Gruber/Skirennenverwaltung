@@ -3,16 +3,15 @@
     <v-main class="background">
       <h1 class="text mt-15 text-center white--text">Ski Alpin Kalender 2021</h1>
       <v-container class="mt-5">
-        <v-btn class="text mt-5 mb-5 warning">Rennen hinzufügen</v-btn>
+        <v-btn to="addRace" class="text mt-5 mb-5 warning">Rennen hinzufügen</v-btn>
         <v-data-table
-          v-model="selected"
           :headers="headers"
           :items="rennen"
-          show-select
-          :items-per-page="6"
-          :footer-props="{ itemsPerPageOptions: [6, 12, 18] }"
+          :items-per-page="8"
+          :footer-props="{ itemsPerPageOptions: [8, 14, 18] }"
           class="elevation-1"
         ></v-data-table>
+        <v-btn to="fahrer" class="text mt-5 mb-5 warning">fahrer</v-btn>
       </v-container>
     </v-main>
   </v-app>
@@ -25,7 +24,6 @@ export default {
   name: 'Home',
   data() {
     return {
-      selected: [],
       rennen: [],
       headers: [
         {
@@ -57,12 +55,15 @@ export default {
           text: 'Action',
           value: 'action',
           class: 'blue-grey lighten-5',
+          data: {
+            
+          }
         },
       ],
     };
   },
 
-  created () {
+  created() {
     this.getRennen();
   },
 
