@@ -6,27 +6,47 @@
         <v-col class="d-flex justify-center flex-wrap">
           <div>
             <span class="text white--text">Land</span> <br />
-            <input v-model="land" type="text" class="mt-2 input white form-control" aria-label="Large" />
+            <input
+              v-model="rennen.land"
+              type="text"
+              class="mt-2 input white form-control"
+              aria-label="Large"
+            />
           </div>
           <div class="mt-15">
             <span class="text white--text">Ort</span> <br />
-            <input v-model="ort" type="text" class="mt-2 input white form-control" aria-label="Large" />
+            <input
+              v-model="rennen.ort"
+              type="text"
+              class="mt-2 input white form-control"
+              aria-label="Large"
+            />
           </div>
           <div class="mt-15">
             <span class="text white--text">Datum</span> <br />
-            <input v-model="datum" type="text" class="mt-2 input white form-control" aria-label="Large" />
+            <input
+              v-model="rennen.datum"
+              type="text"
+              class="mt-2 input white form-control"
+              aria-label="Large"
+            />
           </div>
         </v-col>
         <v-col class="d-flex justify-center flex-wrap">
           <div>
             <span class="text white--text">Uhrzeit</span> <br />
-            <input v-model="uhrzeit" type="text" class="mt-2 input white form-control" aria-label="Large" />
+            <input
+              v-model="rennen.uhrzeit"
+              type="text"
+              class="mt-2 input white form-control"
+              aria-label="Large"
+            />
           </div>
 
           <div class="mt-15 mb-13">
             <span class="text white--text">Geschlecht</span> <br />
             <input
-              v-model="geschlecht"
+              v-model="rennen.geschlecht"
               type="text"
               class="mt-2 input white form-control"
               aria-label="Large"
@@ -34,7 +54,7 @@
           </div>
 
           <div class="mx-15 mt-15">
-            <v-btn to="/" @click="postRennen(land, ort, datum, uhrzeit, geschlecht)" class="btn warning">Hinzufügen</v-btn>
+            <v-btn @click="postRennen()" class="btn warning">Hinzufügen</v-btn>
           </div>
         </v-col>
       </v-container>
@@ -46,26 +66,21 @@
 import axios from 'axios';
 
 export default {
-  props: {
-    rennen: {
-      rennen: Array,
-    },
+  data() {
+    return {
+      rennen: {},
+    };
   },
 
   methods: {
-    async postRennen(land, ort, datum, uhrzeit, geschlecht) {
+    async postRennen() {
       try {
         await axios({
           url: 'http://localhost:3000/rennen',
           method: 'POST',
-          data: {
-            land,
-            ort,
-            datum,
-            uhrzeit,
-            geschlecht,
-          },
+          data: this.rennen,
         });
+        this.$router.push("/");
       } catch (error) {
         console.error(error);
       }

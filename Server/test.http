@@ -4,7 +4,7 @@ GET http://localhost:3000/rennen
 ###
 GET http://localhost:3000/rennen/6
 ###
-DELETE http://localhost:3000/rennen/6
+DELETE http://localhost:3000/rennen/10
 ###
 POST http://localhost:3000/rennen
 Content-Type: application/json
