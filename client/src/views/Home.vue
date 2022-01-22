@@ -3,7 +3,7 @@
     <v-main class="background">
       <h1 class="head mt-15 text-center white--text">Ski Alpin Kalender 2021</h1>
       <v-container class="mt-5">
-          <v-btn to="addRace" class="text mt-5 mb-5 warning">Rennen hinzufügen</v-btn>
+        <v-btn to="addRace" class="text mt-5 mb-5 warning">Rennen hinzufügen</v-btn>
         <v-simple-table>
           <template v-slot:default>
             <thead class="grey lighten-3">
@@ -25,7 +25,11 @@
                 <td>{{ r.geschlecht }}</td>
                 <td>
                   <v-btn @click="delRennen(r.rennnummer)" icon><v-icon small>mdi-delete</v-icon></v-btn>
-                   <v-btn :to="`/changeTime/${r.rennnummer}`" icon></v-btn> 
+                  <v-btn icon>
+                    <v-flex>
+                      <ChangeTime :rid="r.rennnummer" @update="getRennen()"/>
+                    </v-flex>
+                  </v-btn>
                   <v-btn icon><v-icon small>mdi-information</v-icon></v-btn>
                 </td>
               </tr>
@@ -33,9 +37,6 @@
           </template>
         </v-simple-table>
         <v-btn to="fahrer" class="text mt-5 mb-5 warning">fahrer</v-btn>
-        <v-flex>
-          <ChangeTime />
-        </v-flex>
       </v-container>
     </v-main>
   </v-app>
@@ -50,7 +51,6 @@ export default {
   data() {
     return {
       rennen: [],
-      newTime: '',
     };
   },
 
