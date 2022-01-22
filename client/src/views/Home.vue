@@ -1,19 +1,9 @@
 <template>
   <v-app>
     <v-main class="background">
-      <h1 class="text mt-15 text-center white--text">Ski Alpin Kalender 2021</h1>
+      <h1 class="head mt-15 text-center white--text">Ski Alpin Kalender 2021</h1>
       <v-container class="mt-5">
-        <v-btn to="addRace" class="text mt-5 mb-5 warning">Rennen hinzufügen</v-btn>
-        <v-card>
-          <!-- <v-data-table
-            :headers="headers"
-            :items="rennen"
-            :items-per-page="14"
-            :footer-props="{ itemsPerPageOptions: [8, 14, 18] }"
-            class="elevation-1"
-          >
-          </v-data-table>-->
-        </v-card>
+          <v-btn to="addRace" class="text mt-5 mb-5 warning">Rennen hinzufügen</v-btn>
         <v-simple-table>
           <template v-slot:default>
             <thead class="grey lighten-3">
@@ -35,7 +25,7 @@
                 <td>{{ r.geschlecht }}</td>
                 <td>
                   <v-btn @click="delRennen(r.rennnummer)" icon><v-icon small>mdi-delete</v-icon></v-btn>
-                  <v-btn icon><v-icon small>mdi-pencil</v-icon></v-btn>
+                   <v-btn :to="`/changeTime/${r.rennnummer}`" icon></v-btn> 
                   <v-btn icon><v-icon small>mdi-information</v-icon></v-btn>
                 </td>
               </tr>
@@ -43,6 +33,9 @@
           </template>
         </v-simple-table>
         <v-btn to="fahrer" class="text mt-5 mb-5 warning">fahrer</v-btn>
+        <v-flex>
+          <ChangeTime />
+        </v-flex>
       </v-container>
     </v-main>
   </v-app>
@@ -50,45 +43,19 @@
 
 <script>
 import axios from 'axios';
+import ChangeTime from '@/components/ChangeTime.vue';
 
 export default {
   name: 'Home',
   data() {
     return {
       rennen: [],
-      // headers: [
-      //   {
-      //     text: 'Land',
-      //     value: 'land',
-      //     class: 'blue-grey lighten-5',
-      //   },
-      //   {
-      //     text: 'Ort',
-      //     value: 'ort',
-      //     class: 'blue-grey lighten-5',
-      //   },
-      //   {
-      //     text: 'Datum',
-      //     value: 'datum',
-      //     class: 'blue-grey lighten-5',
-      //   },
-      //   {
-      //     text: 'Uhrzeit',
-      //     value: 'uhrzeit',
-      //     class: 'blue-grey lighten-5',
-      //   },
-      //   {
-      //     text: 'Geschlecht',
-      //     value: 'geschlecht',
-      //     class: 'blue-grey lighten-5',
-      //   },
-      //   {
-      //     text: 'Actions',
-      //     value: 'actions',
-      //     class: 'blue-grey lighten-5',
-      //   },
-      // ],
+      newTime: '',
     };
+  },
+
+  components: {
+    ChangeTime,
   },
 
   created() {
@@ -127,6 +94,11 @@ export default {
   background-color: #414b6f;
 }
 .text {
+  font-family: fredoka one;
+  font-weight: 100;
+  font-size: 25px;
+}
+.head {
   font-family: fredoka one;
   font-weight: 100;
   font-size: 40px;

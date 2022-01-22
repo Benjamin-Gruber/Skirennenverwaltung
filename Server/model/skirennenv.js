@@ -6,7 +6,7 @@ const getFahrer = async () => {
 };
 
 async function getRennen() {
-  const { rows } = await db.query('SELECT * FROM rennen');
+  const { rows } = await db.query('SELECT * FROM rennen ORDER BY rennnummer');
   return rows;
 }
 
