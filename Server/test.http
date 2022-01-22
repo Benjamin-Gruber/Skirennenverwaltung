@@ -1,4 +1,4 @@
-GET http://localhost:3000/fahrer
+GET http://localhost:3000/fahrer/2
 ###
 GET http://localhost:3000/rennen
 ###

@@ -2,7 +2,7 @@ const asyncHandler = require('express-async-handler');
 const model = require('../model/skirennenv');
 
 const getFahrer = asyncHandler(async (req, res) => {
-  res.status(200).json(await model.getFahrer());
+  res.status(200).json(await model.getFahrer(req.params.rennen_nummer));
 });
 
 const getRennen = asyncHandler(async (req, res) => {

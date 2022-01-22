@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-main class="background">
-      <h1 class="head mt-15 text-center white--text">Fahrer/innen</h1>
+      <h1 class="head mt-15 text-center white--text">Fahrer/Innen</h1>
       <v-container fluid class="mt-5 d-flex flex-wrap" justify-center>
         <ShowFahrer class="my-10 mx-10" :f="f" v-for="f of fahrer" :key="f" />
       </v-container>
@@ -14,13 +14,20 @@ import axios from 'axios';
 import ShowFahrer from '@/components/ShowFahrer.vue';
 
 export default {
+  props: {
+    rid: {
+      type: String,
+    },
+  },
+
   data() {
     return {
       fahrer: [],
     };
   },
+
   created() {
-    this.getFahrer();
+    this.getFahrer(this.rid);
   },
 
   components: {
@@ -28,10 +35,10 @@ export default {
   },
 
   methods: {
-    async getFahrer() {
+    async getFahrer(rid) {
       try {
         const { data } = await axios({
-          url: 'http://localhost:3000/fahrer',
+          url: `http://localhost:3000/fahrer/${rid}`,
           method: 'GET',
         });
         this.fahrer = data;

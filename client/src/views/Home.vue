@@ -30,7 +30,7 @@
                       <ChangeTime :rid="r.rennnummer" @update="getRennen()"/>
                     </v-flex>
                   </v-btn>
-                  <v-btn icon><v-icon small>mdi-information</v-icon></v-btn>
+                  <v-btn :to="`/fahrer/${r.rennnummer}`" icon><v-icon small>mdi-information</v-icon></v-btn>
                 </td>
               </tr>
             </tbody>

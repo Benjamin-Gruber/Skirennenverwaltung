@@ -1,9 +1,13 @@
 const db = require('../db');
 
-const getFahrer = async () => {
-  const { rows } = await db.query('SELECT * FROM fahrer');
+async function getFahrer(rnr) {
+  const { rows } = await db.query(
+    `SELECT name, geburtstag, nationalität, größe, gewicht, geschlecht, image 
+    FROM fahrer JOIN fahrer_rennen fr on fahrer.name = fr.fahrer_name WHERE rennen_nummer = $1;`,
+    [rnr],
+  );
   return rows;
-};
+}
 
 async function getRennen() {
   const { rows } = await db.query('SELECT * FROM rennen ORDER BY rennnummer');

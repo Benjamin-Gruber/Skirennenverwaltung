@@ -10,7 +10,7 @@ const {
 
 const router = express.Router();
 
-router.get('/fahrer', getFahrer);
+router.get('/fahrer/:rennen_nummer', getFahrer);
 router.get('/rennen', getRennen);
 router.get('/rennen/:rennnummer', getRen);
 router.delete('/rennen/:rennnummer', delRennen);
