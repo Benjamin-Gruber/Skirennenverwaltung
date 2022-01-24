@@ -2,6 +2,9 @@
   <v-app>
     <v-main class="background">
       <h1 class="head mt-15 text-center white--text">Fahrer/Innen</h1>
+      <v-container class="d-flex justify-center">
+        <v-btn to="/" class="text mt-5 warning">Zurück zu Home</v-btn>
+      </v-container>
       <v-container fluid class="mt-5 d-flex flex-wrap" justify-center>
         <ShowFahrer class="my-10 mx-10" :f="f" v-for="f of fahrer" :key="f" />
       </v-container>
@@ -58,5 +61,10 @@ export default {
 }
 .background {
   background-color: #414b6f;
+}
+.text {
+  font-family: fredoka one;
+  font-weight: 100;
+  font-size: 15px;
 }
 </style>

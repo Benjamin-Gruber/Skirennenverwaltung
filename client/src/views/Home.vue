@@ -36,7 +36,6 @@
             </tbody>
           </template>
         </v-simple-table>
-        <v-btn to="fahrer" class="text mt-5 mb-5 warning">fahrer</v-btn>
       </v-container>
     </v-main>
   </v-app>

@@ -4,7 +4,7 @@
       <v-img :src="f.image" width="320"></v-img>
       <v-card-title>{{ f.name }}</v-card-title>
       <v-card-text>
-        Geburtstag: <span class="font-weight-black">{{ f.geburtstag }} </span> <br />
+        Geburtstag: <span class="font-weight-black">{{ f.geburtstag.substring(0, 10) }} </span> <br />
         Nationalität: <span class="font-weight-black">{{ f.nationalität }}</span> <br />
         Größe: <span class="font-weight-black">{{ f.größe }}</span> <br />
         Gewicht: <span class="font-weight-black">{{ f.gewicht }}</span> <br />
