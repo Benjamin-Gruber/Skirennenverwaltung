@@ -1,9 +1,11 @@
 <template>
   <v-app>
     <v-main class="background">
-      <h1 class="head mt-15 text-center white--text">Ski Alpin Kalender 2021</h1>
+      <v-row class="d-flex justify-center">
+        <h1 class="head mt-15 text-center white--text">Ski Alpin Kalender 2021</h1>
+        <v-img class="mt-14 ml-2" src="images/skifahrer.png" max-width="70" max-height="75" alt="Logo"></v-img>
+      </v-row>
       <v-container class="mt-5">
-        <!-- <v-btn to="addRace" class="text mt-5 mb-5 warning">Rennen hinzufügen</v-btn> -->
         <v-felx> <AddRace @update="getRennen()" /> </v-felx>
         <v-simple-table>
           <template v-slot:default>

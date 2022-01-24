@@ -6,7 +6,7 @@
         <v-btn to="/" class="text mt-5 warning">Zurück zu Home</v-btn>
       </v-container>
       <v-container fluid class="mt-5 d-flex flex-wrap" justify-center>
-        <ShowFahrer class="my-10 mx-10" :f="f" v-for="f of fahrer" :key="f" />
+        <ShowFahrer class="my-10 mx-10" :f="f" v-for="f of fahrer" :key="f.rennnummer" />
       </v-container>
     </v-main>
   </v-app>
