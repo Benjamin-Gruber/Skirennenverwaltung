@@ -10,7 +10,9 @@
           <v-form class="px-3 mt-4">
             <v-text-field label="Neue Zeit" v-model="newTime"></v-text-field>
           </v-form>
-          <v-btn @click="changeTime(rid)" class="btn warning mx-0 mt-3 text">Enter</v-btn>
+          <v-card-actions>
+            <v-btn @click="changeTime(rid)" class="btn warning mx-0 mt-3 text">Enter</v-btn>
+          </v-card-actions>
         </v-card-text>
       </v-card>
     </v-dialog>
@@ -27,7 +29,6 @@ export default {
   },
   data() {
     return {
-      rennen: [],
       newTime: '',
       dialog: false,
     };

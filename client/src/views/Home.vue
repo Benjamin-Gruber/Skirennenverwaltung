@@ -3,7 +3,8 @@
     <v-main class="background">
       <h1 class="head mt-15 text-center white--text">Ski Alpin Kalender 2021</h1>
       <v-container class="mt-5">
-        <v-btn to="addRace" class="text mt-5 mb-5 warning">Rennen hinzufügen</v-btn>
+        <!-- <v-btn to="addRace" class="text mt-5 mb-5 warning">Rennen hinzufügen</v-btn> -->
+        <v-felx> <AddRace @update="getRennen()" /> </v-felx>
         <v-simple-table>
           <template v-slot:default>
             <thead class="grey lighten-3">
@@ -27,7 +28,7 @@
                   <v-btn @click="delRennen(r.rennnummer)" icon><v-icon small>mdi-delete</v-icon></v-btn>
                   <v-btn icon>
                     <v-flex>
-                      <ChangeTime :rid="r.rennnummer" @update="getRennen()"/>
+                      <ChangeTime :rid="r.rennnummer" @update="getRennen()" />
                     </v-flex>
                   </v-btn>
                   <v-btn :to="`/fahrer/${r.rennnummer}`" icon><v-icon small>mdi-information</v-icon></v-btn>
@@ -44,6 +45,7 @@
 <script>
 import axios from 'axios';
 import ChangeTime from '@/components/ChangeTime.vue';
+import AddRace from '@/components/AddRace.vue';
 
 export default {
   name: 'Home',
@@ -55,6 +57,7 @@ export default {
 
   components: {
     ChangeTime,
+    AddRace,
   },
 
   created() {
