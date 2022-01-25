@@ -23,7 +23,7 @@
             <v-text-field label="Geschlecht" v-model="rennen.geschlecht"></v-text-field>
           </v-form>
           <v-card-actions>
-            <v-btn @click="postRennen()" class="btn warning mx-0 mt-3 text">Enter</v-btn>
+            <v-btn @click="postRennen()" class="btn warning mx-0 mt-3 text">Save</v-btn>
           </v-card-actions>
         </v-card-text>
       </v-card>
